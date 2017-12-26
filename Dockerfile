@@ -6,7 +6,7 @@ ARG BUILD_ID=""
 ENV BUILD_ID ${BUILD_ID:-'0.0.0.0-boo!'}
 
 WORKDIR /code
-COPY . /code
+COPY ./app/ /code
 
 RUN npm install && \
     npm shrinkwrap
