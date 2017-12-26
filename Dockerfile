@@ -1,4 +1,4 @@
-FROM node:7-slim
+FROM node:7-alpine
 MAINTAINER Said Sef <saidsef@gmail.com> (http://saidsef.co.uk/)
 
 ARG BUILD_ID=""
