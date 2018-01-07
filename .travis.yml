@@ -7,6 +7,7 @@ node_js:
   - "6"
   - "7"
   - "8"
+  - "9"
 install: true
 before_script:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
