@@ -1,7 +1,7 @@
 {
   "name": "node-webserver",
-  "version": "0.1.0",
-  "description": "test application web server",
+  "version": "0.2.0",
+  "description": "test application - web server",
   "main": "index.js",
   "scripts": {
     "install": "npm install",
@@ -20,5 +20,8 @@
   "dependencies": {
     "express": "~4",
     "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.0.0"
   }
 }
