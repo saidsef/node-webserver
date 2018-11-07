@@ -4,7 +4,7 @@ BUILD_ID=$1
 
 info() {
   echo """
-    This is a containerised Node Application Webserver
+    This is a containerised NodeJS Application Webserver
   """
 }
 
