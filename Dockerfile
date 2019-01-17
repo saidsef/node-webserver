@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:11-alpine
 MAINTAINER Said Sef <saidsef@gmail.com> (saidsef.co.uk/)
 
 ARG BUILD_ID=""
@@ -12,10 +12,7 @@ COPY ./app/ /code
 
 RUN echo ${BUILD_ID} > build_id.txt
 RUN npm install && \
-    npm shrinkwrap && \
-    chown -R nobody:nobody .
-
-USER nobody
+    npm shrinkwrap
 
 EXPOSE ${PORT}
 
