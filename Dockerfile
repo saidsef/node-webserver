@@ -1,4 +1,4 @@
-FROM node:7-alpine
+FROM node:10-alpine
 MAINTAINER Said Sef <saidsef@gmail.com> (saidsef.co.uk/)
 
 ARG BUILD_ID=""
@@ -6,14 +6,17 @@ ARG PORT=""
 
 ENV BUILD_ID ${BUILD_ID:-'0.0.0.0-boo!'}
 ENV PORT ${PORT:-80}
+
 WORKDIR /code
 COPY ./app/ /code
 
-RUN npm install && \
-    npm shrinkwrap
-
-#  create build id
 RUN echo ${BUILD_ID} > build_id.txt
+RUN npm install && \
+    npm shrinkwrap && \
+    chown -R nobody .
 
-EXPOSE $PORT
-CMD npm run start
+USER nobody
+
+EXPOSE ${PORT}
+
+CMD ["npm", "run", "start"]

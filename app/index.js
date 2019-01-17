@@ -1,12 +1,15 @@
 'use strict';
 
 const express = require('express');
+const prom    = require("express-prom-bundle");
 const logging = require("morgan");
 const fs      = require("fs");
 
-const app = express();
-const PORT = process.env.PORT || 80;
+const app               = express();
+const metricsMiddleware = prom({includeMethod: true});
+const PORT              = process.env.PORT || 80;
 
+app.use(metricsMiddleware);
 app.use(logging("combined"));
 
 app.get("*", (req, res, next) => {
