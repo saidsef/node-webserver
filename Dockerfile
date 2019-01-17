@@ -13,7 +13,7 @@ COPY ./app/ /code
 RUN echo ${BUILD_ID} > build_id.txt
 RUN npm install && \
     npm shrinkwrap && \
-    chown -R nobody .
+    chown -R nobody:nobody .
 
 USER nobody
 
