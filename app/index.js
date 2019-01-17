@@ -6,7 +6,7 @@ const logging = require("morgan");
 const fs      = require("fs");
 
 const app               = express();
-const metricsMiddleware = prom({includeMethod: true});
+const metricsMiddleware = prom({includeMethod: true, includeMethod: true, includePath: true});
 const PORT              = process.env.PORT || 80;
 
 app.use(metricsMiddleware);
