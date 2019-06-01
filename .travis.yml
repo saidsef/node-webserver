@@ -9,7 +9,7 @@ node_js:
   - "node"
 install: true
 before_script:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - sudo cat /etc/default/docker
 script:
   - docker version
