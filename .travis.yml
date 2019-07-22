@@ -1,18 +1,10 @@
 sudo: required
 services:
   - docker
-laguage: node_js
-node_js:
-  - "8"
-  - "9"
-  - "10"
-  - "node"
 install: true
 before_script:
   - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-  - sudo cat /etc/default/docker
 script:
-  - docker version
   - ./build.sh $TRAVIS_BUILD_NUMBER
 notifications:
   email: true
