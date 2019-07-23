@@ -10,6 +10,7 @@ ENV PORT ${PORT:-80}
 WORKDIR /code
 COPY ./app/ /code
 
+RUN apk add -U --no-cache bash
 RUN echo ${BUILD_ID} > build_id.txt
 RUN npm install && \
     npm shrinkwrap
