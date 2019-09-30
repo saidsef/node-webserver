@@ -11,11 +11,8 @@ WORKDIR /code
 COPY ./app/ /code
 
 RUN echo ${BUILD_ID} > build_id.txt
-RUN rm -rf /var/cache/apk/* && \
-    yarn install && \
-    yarn check && \
-    yarn autoclean --init && \
-    yarn autoclean --force
+RUN npm install && \
+    npm shrinkwrap
 
 EXPOSE ${PORT}
 
