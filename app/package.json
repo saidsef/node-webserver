@@ -4,8 +4,6 @@
   "description": "test application - web server",
   "main": "index.js",
   "scripts": {
-    "install": "npm install",
-    "server": "npm run install && npm run start",
     "test": "echo \"Debug: no test specified\" && exit 0",
     "start": "node index.js"
   },
@@ -24,6 +22,6 @@
     "prom-client": "^11.2.1"
   },
   "devDependencies": {
-    "mocha": "^5.2.0"
+    "mocha": "^6.2.2"
   }
 }
