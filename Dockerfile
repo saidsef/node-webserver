@@ -1,18 +1,25 @@
-FROM node:12-alpine
+FROM node:13-alpine
 MAINTAINER Said Sef <saidsef@gmail.com> (saidsef.co.uk/)
 
 ARG BUILD_ID=""
 ARG PORT=""
 
 ENV BUILD_ID ${BUILD_ID:-'0.0.0.0-boo!'}
-ENV PORT ${PORT:-80}
+ENV PORT ${PORT:-8080}
 
 WORKDIR /code
 COPY ./app/ /code
 
 RUN echo ${BUILD_ID} > build_id.txt
-RUN npm install && \
-    npm shrinkwrap
+RUN apk add --update --no-cache curl && \
+    rm -rfv /var/cache/apk/* && \
+    yarn install && \
+    yarn check && \
+    yarn autoclean --init && \
+    yarn autoclean --force && \
+    chown -R nobody .
+
+USER nobody
 
 EXPOSE ${PORT}
 
