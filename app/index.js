@@ -6,9 +6,10 @@ const logging = require("morgan");
 const fs      = require("fs");
 
 const app               = express();
-const metricsMiddleware = prom({includeMethod: true, includeMethod: true, includePath: true});
-const PORT              = process.env.PORT || 80;
+const metricsMiddleware = prom({includeMethod: true, includePath: true});
+const PORT              = process.env.PORT || 8080;
 
+app.enable('trust proxy');
 app.use(metricsMiddleware);
 app.use(logging("combined"));
 
