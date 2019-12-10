@@ -15,7 +15,13 @@ To deploy locally:
 docker run -d -p 80:80 saidsef/node-webserver
 ```
 
+To deploy in Kubernetes:
+```shell
+kubectl apply -k ./deployments/
+```
+> Remeber to update `/deployments/ingress.yml` ingress hostname
+
 Then navigate to:
 ```shell
-http://localhost
+http://hostname.tld
 ```
