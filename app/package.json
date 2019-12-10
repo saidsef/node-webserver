@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Debug: no test specified\" && exit 0",
-    "start": "node index.js"
+    "start": "npm install && node index.js"
   },
+  "engines": {
+    "node": ">=12"
+  },
+  "homepage": "https://github.com/saidsef/node-webserver/blob/master/README.md",
   "keywords": [
     "test",
     "nodejs",
@@ -19,6 +23,14 @@
     "express": ">=4.16.4",
     "express-prometheus-middleware": ">=0.8.5",
     "morgan": ">=1.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saidsef/node-webserver.git",
+    "directory": "app/"
+  },
+  "bugs": {
+    "url": "https://github.com/saidsef/node-webserver/issues"
   },
   "devDependencies": {
     "mocha": ">=6.2.2"
