@@ -9,11 +9,6 @@ resources:
 - service.yml
 - ingress.yml
 
-vars:
- - name: DOMAIN_NAME
-   literals:
-     - $(DOMAIN_NAME)
-
 commonLabels:
   app.kubernetes.io/name: server
 
