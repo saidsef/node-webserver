@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Debug: no test specified\" && exit 0",
-    "start": "npm install && node index.js"
+    "start": "node index.js"
   },
   "engines": {
     "node": ">=12"
