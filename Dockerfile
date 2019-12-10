@@ -4,6 +4,9 @@ MAINTAINER Said Sef <saidsef@gmail.com> (saidsef.co.uk/)
 ARG BUILD_ID=""
 ARG PORT=""
 
+ENV NODE_ENV production
+ENV NPM_CONFIG_FETCH_RETRIES 10
+ENV NPM_CONFIG_LOGLEVEL warn
 ENV BUILD_ID ${BUILD_ID:-'0.0.0.0-boo!'}
 ENV PORT ${PORT:-8080}
 
