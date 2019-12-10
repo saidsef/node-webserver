@@ -1,2 +1,3 @@
 build_id.txt
+app/node_modules/
 node_modules/*
