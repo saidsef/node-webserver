@@ -1,3 +1,4 @@
+# # syntax=docker/dockerfile:1.0-experimental
 FROM node:13-alpine
 MAINTAINER Said Sef <saidsef@gmail.com> (saidsef.co.uk/)
 
