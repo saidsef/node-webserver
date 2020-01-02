@@ -37,9 +37,9 @@ delete() {
 # }
 
 buildx() {
-  echo "Build other ARCH"
-  ./buildx create --use
-  ./buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t saidsef/node-webserver:latest --push .
+  echo "Build multi ARCH"
+  docker buildx create --use
+  docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t saidsef/node-webserver:latest --push .
 }
 
 # deprecated in favour of buildx
