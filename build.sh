@@ -27,27 +27,32 @@ delete() {
   fi
 }
 
-build() {
-  echo "Building image"
-  docker build --build-arg "BUILD_ID=${BUILD_ID}" -t saidsef/node-webserver .
-  docker build --build-arg "BUILD_ID=${BUILD_ID}" -t saidsef/node-webserver:arm64 . -f Dockerfile.arm64
-  docker build --build-arg "BUILD_ID=${BUILD_ID}" -t saidsef/node-webserver:armhf . -f Dockerfile.armhf
-  docker tag saidsef/node-webserver saidsef/node-webserver:build-${BUILD_ID}
+# deprecated in favour of buildx
+# build() {
+#   echo "Building image"
+#   docker build --build-arg "BUILD_ID=${BUILD_ID}" -t saidsef/node-webserver .
+#   docker build --build-arg "BUILD_ID=${BUILD_ID}" -t saidsef/node-webserver:arm64 . -f Dockerfile.arm64
+#   docker build --build-arg "BUILD_ID=${BUILD_ID}" -t saidsef/node-webserver:armhf . -f Dockerfile.armhf
+#   docker tag saidsef/node-webserver saidsef/node-webserver:build-${BUILD_ID}
+# }
+
+buildx() {
+  echo "Build other ARCH"
+  ./buildx create --use
+  ./buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t saidsef/node-webserver:latest --push .
 }
 
-push() {
-  echo "Pushing image to docker hub"
-  docker push saidsef/node-webserver
-  echo $?
-}
+# deprecated in favour of buildx
+# push() {
+#   echo "Pushing image to docker hub"
+#   docker push saidsef/node-webserver
+#   echo $?
+# }
 
 main() {
   info
   cleanup
-  build
-  push
-  cleanup
-  delete
+  buildx
 }
 
 main
