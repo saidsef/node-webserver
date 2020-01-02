@@ -3,12 +3,12 @@ services:
   - docker
 install: true
 before_script:
-  - export DOCKER_BUILDKIT=1
-  - export BUILDX_VERSION=v0.3.1
-  - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-  - wget https://github.com/docker/buildx/releases/download/$BUILDX_VERSION/buildx-$BUILDX_VERSION.linux-amd64
-  - chmod +x buildx-$BUILDX_VERSION.linux-amd64 && mv buildx-$BUILDX_VERSION.linux-amd64 buildx
-  - ls -lha
+before_install:
+  - curl -fsSL https://get.docker.com | sh
+  - echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
+  - mkdir -p $HOME/.docker
+  - echo '{"experimental":"enabled"}' | sudo tee $HOME/.docker/config.json
+  - sudo service docker start
 script:
   - ./build.sh $TRAVIS_BUILD_NUMBER
 notifications:
