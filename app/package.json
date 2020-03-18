@@ -20,7 +20,7 @@
   "author": "Said Sef <saidsef@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "express": ">=4.16.4",
+    "express": ">=4.17.1",
     "express-prometheus-middleware": ">=0.8.5",
     "morgan": ">=1.9.1"
   },
