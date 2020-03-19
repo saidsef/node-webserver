@@ -1,5 +1,6 @@
 FROM node:13-alpine
-MAINTAINER Said Sef <saidsef@gmail.com> (saidsef.co.uk/)
+
+LABEL maintainer="Said Sef <saidsef@gmail.com> (saidsef.co.uk/)"
 
 ARG BUILD_ID=""
 ARG PORT=""
