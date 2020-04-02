@@ -14,6 +14,11 @@ app.use(express.json()); // support json encoded bodies
 app.use(promMid({ metricsPath: '/metrics', collectDefaultMetrics: true, requestDurationBuckets: [0.1, 0.5, 1, 1.5]}));
 app.use(logging("combined"));
 
+app.get('/healthz', (req, res, next) => {
+  res.set({'X-Robots-Tag' : 'noindex, nofollow, noarchive'});
+  res.json({'status': 'healthy'});
+});
+
 app.get("*", (req, res, next) => {
   const fileName = "build_id.txt";
   let randomNumber = parseInt(String(parseFloat((Math.random() * 100)).toFixed(2)),10);
