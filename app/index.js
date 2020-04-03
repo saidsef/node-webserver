@@ -6,10 +6,12 @@ const logging = require("morgan");
 const fs      = require("fs");
 
 const app     = express();
+const http    = require('http').Server(app);
+
 const PORT    = process.env.PORT || 8080;
 
 app.enable('trust proxy');
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // support json encoded bodies
 app.use(promMid({ metricsPath: '/metrics', collectDefaultMetrics: true, requestDurationBuckets: [0.1, 0.5, 1, 1.5]}));
 app.use(logging("combined"));
@@ -26,4 +28,4 @@ app.get("*", (req, res, next) => {
   res.json({ "message": "Hello World!", "random_number": randomNumber, "build": buildID });
 });
 
-app.listen(PORT);
+http.listen(PORT);
