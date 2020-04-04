@@ -6,15 +6,12 @@ metadata:
   labels:
     app.kubernetes.io/name: server
     app.kubernetes.io/tier: frontend
-  annotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "8080"
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app.kubernetes.io/name: server
   ports:
   - protocol: TCP
     port: 8080
     targetPort: 8080
-    name: server
+    name: web
