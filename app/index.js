@@ -1,9 +1,12 @@
 'use strict';
 
-const express = require('express');
-const promMid = require('express-prometheus-middleware');
-const logging = require("morgan");
-const fs      = require("fs");
+const express     = require('express');
+const promMid     = require('express-prometheus-middleware');
+const logging     = require("morgan");
+const compression = require('compression');
+const helmet      = require('helmet');
+const cors        = require('cors');
+const fs          = require("fs");
 
 const app     = express();
 const http    = require('http').Server(app);
@@ -15,6 +18,35 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // support json encoded bodies
 app.use(promMid({ metricsPath: '/metrics', collectDefaultMetrics: true, requestDurationBuckets: [0.1, 0.5, 1, 1.5]}));
 app.use(logging("combined"));
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      baseUri: ["'self'"],
+      defaultSrc: ["'self'"],
+      formAction: ["'none'"],
+      frameAncestors: ["'none'"],
+      imgSrc: ["'self"],
+      objectSrc: ["'self'"],
+      sandbox: ['allow-forms', 'allow-scripts'],
+      scriptSrc: ["'none'"],
+      styleSrc: ["'none'"],
+      upgradeInsecureRequests: true,
+    },
+  },
+  referrerPolicy: { policy: 'same-origin' },
+  featurePolicy: {
+    features: {
+      fullscreen: ["'self'"],
+      vibrate: ["'self'"],
+      geolocation: ["'self'"],
+      wakeLock: ["'self'"],
+    },
+  },
+}));
+app.use(cors());
+app.use(compression());
+app.options('*', cors());
+app.disable('x-powered-by');
 
 app.get('/healthz', (req, res, next) => {
   res.set({'X-Robots-Tag' : 'noindex, nofollow, noarchive'});
