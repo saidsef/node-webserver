@@ -2,7 +2,7 @@
 
 This is a basic `Hello World` node application web server.
 
-I use this container to test DC/OS and Kubernetes (K8S) platform builds.
+This is used to test container platform builds such as K8s, Messos (DC/OS) etc.
 
 ## Prerequisites
 
