@@ -64,6 +64,9 @@ spec:
               memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false
+            privileged: false
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
             # user/group: nobody
             runAsGroup: 65534
             runAsUser: 65534
