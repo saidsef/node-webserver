@@ -5,6 +5,7 @@ const promMid     = require('express-prometheus-middleware');
 const logging     = require("morgan");
 const compression = require('compression');
 const helmet      = require('helmet');
+const crypto      = require('crypto');
 const cors        = require('cors');
 const fs          = require("fs");
 
@@ -30,7 +31,7 @@ app.use(helmet({
       sandbox: ['allow-forms', 'allow-scripts'],
       scriptSrc: ["'none'"],
       styleSrc: ["'none'"],
-      upgradeInsecureRequests: true,
+      upgradeInsecureRequests: [true],
     },
   },
   referrerPolicy: { policy: 'same-origin' },
@@ -55,9 +56,10 @@ app.get('/healthz', (req, res, next) => {
 
 app.get("*", (req, res, next) => {
   const fileName = "build_id.txt";
-  let randomNumber = parseInt(String(parseFloat((Math.random() * 100)).toFixed(2)),10);
+  let number = parseInt(String(parseFloat((Math.random() * 100)).toFixed(2)),10);
   let buildID = (fs.existsSync(fileName)) ? fs.readFileSync(fileName, "utf-8").trim() : "NOFILE";
-  res.json({ "message": "Hello World!", "random_number": randomNumber, "build": buildID });
+  let sha1 = crypto.randomBytes(20).toString("hex")
+  res.json({ "message": "Hello World!", "random_number": number, "random_sha1": sha1, "build": buildID });
 });
 
 http.listen(PORT);
