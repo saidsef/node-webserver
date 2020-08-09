@@ -31,7 +31,7 @@ app.use(helmet({
       sandbox: ['allow-forms', 'allow-scripts'],
       scriptSrc: ["'none'"],
       styleSrc: ["'none'"],
-      upgradeInsecureRequests: [true],
+      upgradeInsecureRequests: true,
     },
   },
   referrerPolicy: { policy: 'same-origin' },
