@@ -22,5 +22,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: web
+          serviceName: server
           servicePort: 8080
