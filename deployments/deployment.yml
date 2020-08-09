@@ -44,17 +44,17 @@ spec:
                 - node
             initialDelaySeconds: 5
             failureThreshold: 2
-            timeoutSeconds: 1
+            timeoutSeconds: 3
             successThreshold: 1
+            periodSeconds: 5
           readinessProbe:
-            httpGet:
+            tcpSocket:
               port: 8080
-              path: "/"
-              scheme: "HTTP"
-            initialDelaySeconds: 3
+            initialDelaySeconds: 5
             failureThreshold: 2
-            timeoutSeconds: 1
+            timeoutSeconds: 3
             successThreshold: 1
+            periodSeconds: 5
           resources:
             requests:
               cpu: 10m
