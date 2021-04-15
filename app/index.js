@@ -31,22 +31,18 @@ app.use(helmet({
       sandbox: ['allow-forms', 'allow-scripts'],
       scriptSrc: ["'none'"],
       styleSrc: ["'none'"],
-      upgradeInsecureRequests: true,
+      upgradeInsecureRequests: [],
     },
   },
   referrerPolicy: { policy: 'same-origin' },
-  featurePolicy: {
-    features: {
-      fullscreen: ["'self'"],
-      vibrate: ["'self'"],
-      geolocation: ["'self'"],
-      wakeLock: ["'self'"],
-    },
-  },
 }));
-app.use(cors());
+
+let corsOptions = {
+  origin: '.saidsef.co.uk'
+};
+
+app.use(cors(corsOptions));
 app.use(compression());
-app.options('*', cors());
 app.disable('x-powered-by');
 
 app.get('/healthz', (req, res, next) => {
@@ -56,7 +52,7 @@ app.get('/healthz', (req, res, next) => {
 
 app.get("*", (req, res, next) => {
   const fileName = "build_id.txt";
-  let number = parseInt(String(parseFloat((Math.random() * 100)).toFixed(2)),10);
+  let number = parseInt(String(parseFloat((crypto.randomInt(100) * 100)).toFixed(2)),10);
   let buildID = (fs.existsSync(fileName)) ? fs.readFileSync(fileName, "utf-8").trim() : "NOFILE";
   let sha1 = crypto.randomBytes(20).toString("hex")
   res.json({ "message": "Hello World!", "random_number": number, "random_sha1": sha1, "build": buildID });
