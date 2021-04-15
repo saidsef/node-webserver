@@ -17,10 +17,10 @@ metadata:
       server_tokens off;
 spec:
   rules:
-  - host: $(DOMAIN_NAME)
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: server
-          servicePort: 8080
+    - host: $(DOMAIN_NAME)
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: server
+              servicePort: 8080
