@@ -29,21 +29,13 @@ delete() {
 
 build() {
   echo "Building image"
-  docker build --build-arg "BUILD_ID=${BUILD_ID}" -t saidsef/node-webserver .
-  docker build --build-arg "BUILD_ID=${BUILD_ID}" -t saidsef/node-webserver:arm64 . -f Dockerfile.arm64
-  docker build --build-arg "BUILD_ID=${BUILD_ID}" -t saidsef/node-webserver:armhf . -f Dockerfile.armhf
-  docker tag saidsef/node-webserver "saidsef/node-webserver:build-${BUILD_ID}"
+  docker build --build-arg "BUILD_ID=${BUILD_ID}" -t docker.io/saidsef/node-webserver .
 }
 
-buildx() {
-  echo "Build multi ARCH"
-  docker buildx create --use
-  docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t saidsef/node-webserver:latest --push .
-}
 
 push() {
   echo "Pushing image to docker hub"
-  docker push saidsef/node-webserver
+  docker push docker.io/saidsef/node-webserver
   echo $?
 }
 
