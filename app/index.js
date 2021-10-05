@@ -7,12 +7,10 @@ const compression = require('compression');
 const helmet      = require('helmet');
 const crypto      = require('crypto');
 const cors        = require('cors');
-const fs          = require("fs");
 
-const app     = express();
-const http    = require('http').Server(app);
-
-const PORT    = process.env.PORT || 8080;
+const app  = express();
+const http = require('http').Server(app);
+const PORT = process.env.PORT || 8080;
 
 app.enable('trust proxy');
 app.use(express.urlencoded({ extended: true }));
@@ -37,11 +35,7 @@ app.use(helmet({
   referrerPolicy: { policy: 'same-origin' },
 }));
 
-let corsOptions = {
-  origin: '.saidsef.co.uk'
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(compression());
 app.disable('x-powered-by');
 
@@ -51,11 +45,11 @@ app.get('/healthz', (req, res, next) => {
 });
 
 app.get("*", (req, res, next) => {
-  const fileName = "build_id.txt";
+  const buildID = process.env.BUILD_ID;
   let number = parseInt(String(parseFloat((crypto.randomInt(100) * 100)).toFixed(2)),10);
-  let buildID = (fs.existsSync(fileName)) ? fs.readFileSync(fileName, "utf-8").trim() : "NOFILE";
   let sha1 = crypto.randomBytes(20).toString("hex")
-  res.json({ "message": "Hello World!", "random_number": number, "random_sha1": sha1, "build": buildID });
+  let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.ip || null;
+  res.json({ "message": "Hello World!", "ip": ip, "random_number": number, "random_sha1": sha1, "build": buildID });
 });
 
 http.listen(PORT);
