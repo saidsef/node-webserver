@@ -2,7 +2,7 @@
 
 This is a basic `Hello World` node application web server.
 
-This is used to test container platform builds such as K8s, Messos (DC/OS) etc.
+This is used to test container platform builds such as Kubernetes and other container schedulers.
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ This is used to test container platform builds such as K8s, Messos (DC/OS) etc.
 To deploy locally:
 
 ```shell
-docker run -d -p 80:80 saidsef/node-webserver
+docker run -d -p 8080:8080 docker.io/saidsef/node-webserver:latest
 ```
 
 To deploy in Kubernetes:
@@ -22,10 +22,24 @@ To deploy in Kubernetes:
 kubectl apply -k ./deployments/
 ```
 
-> Remeber to update `/deployments/ingress.yml` ingress hostname
+```shell
+kubectl port-forward svc/server 8080:8080
+```
+
+> To access from `Ingress`, remeber to update file `/deployments/ingress.yml` hostname
 
 Then navigate to:
 
 ```shell
-http://hostname.tld
+http://localhost:8080
 ```
+
+## Source
+
+Our latest and greatest source of Jenkins can be found on [GitHub](#deployment). Fork us!
+
+## Contributing
+
+We would :heart:  you to contribute by making a [pull request](https://github.com/saidsef/node-webserver/pulls).
+
+Please read the official [Contribution Guide](./CONTRIBUTING.md) for more information on how you can contribute.
