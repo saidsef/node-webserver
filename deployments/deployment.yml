@@ -25,13 +25,13 @@ spec:
         app.kubernetes.io/name: server
     spec:
       containers:
-        - name: c
-          image: saidsef/node-webserver:latest
+        - name: server
+          image: docker.io/saidsef/node-webserver:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
               protocol: TCP
-              name: web
+              name: http
           env:
             - name: HOST_IP
               valueFrom:
