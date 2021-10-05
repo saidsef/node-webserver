@@ -17,7 +17,7 @@ metadata:
       server_tokens off;
 spec:
   rules:
-    - host: $(DOMAIN_NAME)
+    - host: $(HOST)
       http:
         paths:
           - path: /
