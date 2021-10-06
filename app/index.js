@@ -48,7 +48,7 @@ app.get("*", (req, res, next) => {
   const buildID = process.env.BUILD_ID;
   let number = parseInt(String(parseFloat((crypto.randomInt(100) * 100)).toFixed(2)),10);
   let sha1 = crypto.randomBytes(20).toString("hex")
-  let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.ip || null;
+  let ip = req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress || null;
   res.json({ "message": "Hello World!", "ip": ip, "random_number": number, "random_sha1": sha1, "build": buildID });
 });
 
