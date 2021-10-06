@@ -37,10 +37,6 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
-            - name: HOST_STARTTIME
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.startTime
           livenessProbe:
             exec:
               command:
