@@ -37,26 +37,30 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
+            - name: HOST_STARTTIME
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.startTime
           livenessProbe:
             exec:
               command:
                 - pgrep
                 - node
             initialDelaySeconds: 5
-            failureThreshold: 2
+            failureThreshold: 3
             timeoutSeconds: 3
             successThreshold: 1
-            periodSeconds: 5
+            periodSeconds: 10
           readinessProbe:
             httpGet:
               port: 8080
               path: /healthz
               scheme: "HTTP"
             initialDelaySeconds: 5
-            failureThreshold: 2
+            failureThreshold: 3
             timeoutSeconds: 3
             successThreshold: 1
-            periodSeconds: 5
+            periodSeconds: 10
           resources:
             requests:
               cpu: 40m
