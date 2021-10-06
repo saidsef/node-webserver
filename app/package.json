@@ -8,9 +8,13 @@
     "start": "node index.js"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">= 14"
   },
   "homepage": "https://github.com/saidsef/node-webserver/blob/master/README.md",
+  "licenses": {
+    "type": "MIT",
+    "url": "https://github.com/saidsef/node-webserver/blob/main/LICENSE.md"
+  },
   "keywords": [
     "test",
     "nodejs",
@@ -23,9 +27,10 @@
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "express-prometheus-middleware": "^0.8",
+    "express-prometheus-middleware": "^1.2.0",
     "helmet": "^4.4.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "prom-client": "^12.0.0"
   },
   "repository": {
     "type": "git",
