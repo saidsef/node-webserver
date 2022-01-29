@@ -11,10 +11,10 @@
     "node": ">= 14"
   },
   "homepage": "https://github.com/saidsef/node-webserver/blob/master/README.md",
-  "licenses": {
+  "licenses": [{
     "type": "MIT",
     "url": "https://github.com/saidsef/node-webserver/blob/main/LICENSE.md"
-  },
+  }],
   "keywords": [
     "test",
     "nodejs",
@@ -28,7 +28,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-prometheus-middleware": "^1.2.0",
-    "helmet": "^4.4.1",
+    "helmet": "^5.0.2",
     "morgan": "^1.10.0",
     "prom-client": "^12.0.0"
   },
