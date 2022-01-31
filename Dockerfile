@@ -14,7 +14,7 @@ ENV PORT ${PORT:-8080}
 WORKDIR /code
 COPY ./app/ /code
 
-RUN echo ${BUILD_ID} > build_id.txt
+RUN echo "${BUILD_ID}" > build_id.txt
 RUN apk add --update --no-cache curl && \
     rm -rfv /var/cache/apk/* && \
     yarn install && \
