@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:16-alpine
 
 LABEL maintainer="Said Sef <saidsef@gmail.com> (saidsef.co.uk/)"
 
@@ -17,7 +17,7 @@ COPY ./app/ /code
 RUN echo "${BUILD_ID}" > build_id.txt
 RUN apk add --update --no-cache curl && \
     rm -rfv /var/cache/apk/* && \
-    yarn install && \
+    yarn install --prod && \
     yarn check && \
     yarn autoclean --init && \
     yarn autoclean --force && \
