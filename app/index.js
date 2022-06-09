@@ -1,7 +1,6 @@
 'use strict';
 
 const express     = require('express');
-const promMid     = require('express-prometheus-middleware');
 const logging     = require("morgan");
 const compression = require('compression');
 const helmet      = require('helmet');
@@ -15,7 +14,6 @@ const PORT = process.env.PORT || 8080;
 app.enable('trust proxy');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // support json encoded bodies
-app.use(promMid({ metricsPath: '/metrics', collectDefaultMetrics: true, requestDurationBuckets: [0.1, 0.5, 1, 1.5]}));
 app.use(logging("combined"));
 app.use(helmet({
   contentSecurityPolicy: {
