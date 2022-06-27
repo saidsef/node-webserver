@@ -39,7 +39,7 @@ spec:
                   fieldPath: status.hostIP
           livenessProbe:
             tcpSocket:
-              port: http
+              port: 8080
             initialDelaySeconds: 5
             failureThreshold: 3
             timeoutSeconds: 3
@@ -47,7 +47,7 @@ spec:
             periodSeconds: 10
           readinessProbe:
             tcpSocket:
-              port: http
+              port: 8080
             initialDelaySeconds: 5
             failureThreshold: 3
             timeoutSeconds: 3
