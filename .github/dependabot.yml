@@ -6,11 +6,9 @@ updates:
       interval: "weekly"
     reviewers:
       - "saidsef"
-    versioning-strategy: "auto"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "weekly"
     reviewers:
       - "saidsef"
-    versioning-strategy: "auto"
