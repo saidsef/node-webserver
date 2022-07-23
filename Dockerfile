@@ -30,5 +30,5 @@ EXPOSE ${PORT}
 # health check endpoint
 HEALTHCHECK --interval=60s --timeout=10s CMD curl --fail 'http://localhost:${PORT}/healthz' || exit 1
 
-CMD ["npm", "run", "start"]
+CMD ["node index.js"]
 ENTRYPOINT ["npm"]
