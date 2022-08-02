@@ -47,7 +47,7 @@ app.get("*", (req, res, next) => {
   let number = parseInt(String(parseFloat((crypto.randomInt(100) * 100)).toFixed(2)),10);
   let sha1 = crypto.randomBytes(20).toString("hex")
   let ip = req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress || null;
-  res.json({ "message": "Hello World!", "ip": ip, "random_number": number, "random_sha1": sha1, "build": buildID, "request": req.headers });
+  res.json({ "message": "Hello World!", "ip": ip, "random_number": number, "random_sha1": sha1, "build": buildID, "request": req.headers, "environment_vars": process.env });
 });
 
 http.listen(PORT);
