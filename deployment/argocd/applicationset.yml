@@ -5,7 +5,6 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - clusters: {}
   - pullRequest:
       github:
         owner: saidsef
@@ -18,13 +17,25 @@ spec:
       requeueAfterSeconds: 120
   template:
     metadata:
-      name: 'server-{{branch}}.{{number}}'
+      name: 'server-{{branch}}-{{number}}'
       annotations:
         argocd.argoproj.io/head: '{{head_sha}}'
     spec:
       source:
         repoURL: 'https://github.com/saidsef/node-webserver.git'
         targetRevision: '{{head_sha}}'
+        kustomize:
+          # patches:
+          # - target:
+          #     kind: Ingress
+          #     version: v1
+          #     name: server
+          #   patch: |-
+          #     - op: replace
+          #       path: /spec/rules/o/host
+          #       value: server-preview.saidsef.co.uk
+          images:
+          - 'docker.io/saidsef/node-webserver:{{branch}}'
         path: deployment
       project: default
       syncPolicy:
@@ -34,5 +45,5 @@ spec:
         syncOptions:
           - CreateNamespace=true
       destination:
-        server: '{{server}}'
+        server: 'https://kubernetes.default.svc'
         namespace: 'server-{{branch}}-{{number}}'
