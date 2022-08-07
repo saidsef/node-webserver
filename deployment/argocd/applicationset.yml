@@ -14,7 +14,7 @@ spec:
         tokenRef:
           secretName: github-token
           key: token
-      requeueAfterSeconds: 120
+      requeueAfterSeconds: 180
   template:
     metadata:
       name: 'server-{{branch}}-{{number}}'
@@ -25,15 +25,18 @@ spec:
         repoURL: 'https://github.com/saidsef/node-webserver.git'
         targetRevision: '{{head_sha}}'
         kustomize:
-          # patches:
+          # patchesJSON6902:
           # - target:
           #     kind: Ingress
-          #     version: v1
+          #     version: networking.k8s.io/v1
           #     name: server
           #   patch: |-
           #     - op: replace
-          #       path: /spec/rules/o/host
-          #       value: server-preview.saidsef.co.uk
+          #       path: /spec/rules/0/host
+          #       value: {{branch}}
+          commonAnnotations:
+            app.kubernetes.io/past-of: preview
+            argocd.argoproj.io/head_sha: '{{head_sha}}'
           images:
           - 'docker.io/saidsef/node-webserver:{{branch}}'
         path: deployment
@@ -44,6 +47,7 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
+          - PruneLast=true
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: 'server-{{branch}}-{{number}}'
