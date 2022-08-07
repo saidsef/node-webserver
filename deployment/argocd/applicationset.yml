@@ -12,10 +12,13 @@ spec:
         repo: node-webserver
         labels:
         - preview
+        tokenRef:
+          secretName: github-token
+          key: token
       requeueAfterSeconds: 120
   template:
     metadata:
-      name: 'server-{{branch}}-{{number}}'
+      name: 'server-{{branch}}.{{number}}'
       annotations:
         argocd.argoproj.io/head: '{{head_sha}}'
     spec:
@@ -31,5 +34,5 @@ spec:
         syncOptions:
           - CreateNamespace=true
       destination:
-        server: '{{server}}''
+        server: '{{server}}'
         namespace: 'server-{{branch}}-{{number}}'
