@@ -61,7 +61,7 @@ jobs:
           BUILD_ID=${{ env.DATE }}
         pull: true
         push: true
-        tags: ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.REPO_NAME }}:${{ env.TAG == '' && 'latest' || env.TAG }}
+        tags: ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.REPO_NAME }}:${{ env.TAG == 'main' && 'latest' || env.TAG }}
     - name: Build and push Docker image - (DATE)
       uses: docker/build-push-action@v2
       if: ${{ github.event_name == 'schedule' || contains(github.ref, 'main') }}
@@ -81,7 +81,7 @@ jobs:
       uses: aquasecurity/trivy-action@master
       if: success()
       with:
-        image-ref: ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.REPO_NAME }}:${{ env.TAG == '' && 'latest' || env.TAG }}
+        image-ref: ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.REPO_NAME }}:${{ env.TAG == 'main' && 'latest' || env.TAG }}
         format: 'template'
         template: '@/contrib/sarif.tpl'
         output: 'trivy-results.sarif'
