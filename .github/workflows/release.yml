@@ -66,7 +66,8 @@ jobs:
           github-token: ${{ github.token }}
           script: |
             const { repo: { owner, repo }, sha } = context;
-            const fs = require('fs');
+            const fs = require('fs').promises;
+            const f = require('fs');
 
             try {
               let asset_ids = await github.rest.repos.listReleaseAssets({
@@ -83,7 +84,7 @@ jobs:
               console.log(e.status);
             } finally {
               for (let file of await fs.readdir('./deployment')) {
-                if (!fs.lstatSync(`./deployment/${file}`).isDirectory()) {
+                if (!f.lstatSync(`./deployment/${file}`).isDirectory()) {
                   await github.rest.repos.uploadReleaseAsset({
                     owner, repo,
                     release_id: ${{ steps.release.outputs.result }},
