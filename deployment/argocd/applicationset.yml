@@ -14,7 +14,7 @@ spec:
         tokenRef:
           secretName: github-token
           key: token
-      requeueAfterSeconds: 180
+      requeueAfterSeconds: 300
   template:
     metadata:
       name: 'server-{{branch}}-{{number}}'
