@@ -24,6 +24,7 @@ spec:
       labels:
         app.kubernetes.io/name: server
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: server
           image: docker.io/saidsef/node-webserver:latest
