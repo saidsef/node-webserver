@@ -111,18 +111,34 @@ jobs:
           kubectl kustomize deployment/ | kubectl apply -f -
           kubectl get all -A
 
-  # auto-approve:
-  #   runs-on: ubuntu-latest
-  #   needs: [build, k8s-test]
-  #   if: ${{ github.event_name == 'pull_request' }}
-  #   steps:
-  #   - name: Auto Approve PR
-  #     uses: actions/github-script@v6
-  #     with:
-  #      script: |
-  #       github.rest.pulls.createReview({
-  #         owner: context.repo.owner,
-  #         repo: context.repo.repo,
-  #         pull_number: context.issue.number,
-  #         event: "APPROVE"
-  #       })
+  auto-approve:
+    runs-on: ubuntu-latest
+    needs: [build, k8s-test]
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+    - name: Auto Approve PR
+      uses: actions/github-script@v6
+      with:
+       script: |
+        github.rest.pulls.createReview({
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          pull_number: context.issue.number,
+          event: "APPROVE"
+        })
+
+  auto-preview:
+    runs-on: ubuntu-latest
+    needs: [auto-approve]
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+    - name: Add Preview Label
+      uses: actions/github-script@v6
+      with:
+        script: |
+          github.rest.issues.addLabels({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            labels: ['preview']
+          })
