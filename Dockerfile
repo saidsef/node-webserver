@@ -1,4 +1,4 @@
-FROM docker.io/node:19.6.1-alpine3.17
+FROM docker.io/node:19.7.0-alpine3.17
 
 LABEL maintainer="Said Sef <saidsef@gmail.com> (saidsef.co.uk/)"
 
