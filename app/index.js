@@ -43,12 +43,19 @@ app.get('/healthz', (req, res, next) => {
 });
 
 app.get("*", (req, res, next) => {
-  const { headers } = req;
+  const { headers, ip } = req;
   const buildID = process.env.BUILD_ID;
-  const number = +(crypto.randomInt(100) * 100).toFixed(2);
-  const sha1 = crypto.randomBytes(20).toString("hex");
-  const ip = req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress || null;
-  res.json({ "message": "Hello World!", "ip": ip, "random_number": number, "random_sha1": sha1, "build": buildID, "request": headers, "environment_vars": process.env });
+  const number = crypto.randomInt(10000);
+  const sha1 = crypto.createHash('sha1').update(crypto.randomBytes(20)).digest('hex');
+  res.json({
+    "message": "Hello World!",
+    "ip": ip,
+    "random_number": number,
+    "random_sha1": sha1,
+    "build": buildID,
+    "request": headers,
+    "environment_vars": process.env
+  });
 });
 
 http.listen(PORT);
