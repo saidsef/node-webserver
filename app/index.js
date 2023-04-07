@@ -8,11 +8,11 @@ const crypto      = require('crypto');
 const cors        = require('cors');
 
 const app  = express();
-const http = require('http').Server(app);
+const http = require('http').createServer(app);
 const PORT = process.env.PORT || 8080;
 
 app.enable('trust proxy');
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json()); // support json encoded bodies
 app.use(logging("combined"));
 app.use(helmet({
@@ -30,7 +30,7 @@ app.use(helmet({
       upgradeInsecureRequests: [],
     },
   },
-  referrerPolicy: { policy: 'same-origin' },
+  referrerPolicy: {policy: 'same-origin'},
 }));
 
 app.use(cors());
@@ -43,11 +43,12 @@ app.get('/healthz', (req, res, next) => {
 });
 
 app.get("*", (req, res, next) => {
+  const { headers } = req;
   const buildID = process.env.BUILD_ID;
-  let number = parseInt(String(parseFloat((crypto.randomInt(100) * 100)).toFixed(2)),10);
-  let sha1 = crypto.randomBytes(20).toString("hex")
-  let ip = req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress || null;
-  res.json({ "message": "Hello World!", "ip": ip, "random_number": number, "random_sha1": sha1, "build": buildID, "request": req.headers, "environment_vars": process.env });
+  const number = +(crypto.randomInt(100) * 100).toFixed(2);
+  const sha1 = crypto.randomBytes(20).toString("hex");
+  const ip = req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress || null;
+  res.json({ "message": "Hello World!", "ip": ip, "random_number": number, "random_sha1": sha1, "build": buildID, "request": headers, "environment_vars": process.env });
 });
 
 http.listen(PORT);
