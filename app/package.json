@@ -1,6 +1,6 @@
 {
   "name": "node-webserver",
-  "version": "0.3.1",
+  "version": "0.4.2",
   "description": "test application - web server",
   "main": "index.js",
   "scripts": {
