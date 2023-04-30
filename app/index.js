@@ -43,13 +43,14 @@ app.get('/healthz', (req, res, next) => {
 });
 
 app.get("*", (req, res, next) => {
-  const { headers, ip } = req;
+  const { headers, ip, ips } = req;
   const buildID = process.env.BUILD_ID;
   const number = crypto.randomInt(10000);
   const sha1 = crypto.createHash('sha1').update(crypto.randomBytes(20)).digest('hex');
   res.json({
     "message": "Hello World!",
     "ip": ip,
+    "ips": ips,
     "random_number": number,
     "random_sha1": sha1,
     "build": buildID,
