@@ -1,11 +1,12 @@
 {
   "name": "node-webserver",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "test application - web server",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Debug: no test specified\" && exit 0",
-    "start": "node index.js"
+    "start": "node index.js",
+    "rebuild": "rm package-lock.json && rm yarn.lock && npm i --production && yarn install --prod"
   },
   "engines": {
     "node": ">= 16"
@@ -29,7 +30,7 @@
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "helmet": "^7.0.0",
+    "helmet": "^7.1.0",
     "morgan": "^1.10.0"
   },
   "repository": {
