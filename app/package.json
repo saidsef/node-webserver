@@ -9,7 +9,7 @@
     "rebuild": "rm package-lock.json && rm yarn.lock && npm i --production && yarn install --prod"
   },
   "engines": {
-    "node": ">= 16"
+    "node": ">= 18"
   },
   "homepage": "https://github.com/saidsef/node-webserver/blob/master/README.md",
   "licenses": [
