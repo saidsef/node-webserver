@@ -42,6 +42,6 @@
     "url": "https://github.com/saidsef/node-webserver/issues"
   },
   "devDependencies": {
-    "mocha": "^10.2.0"
+    "mocha": "^11.0.1"
   }
 }
