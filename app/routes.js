@@ -9,7 +9,7 @@ router.get('/healthz', (req, res) => {
   res.json({'status': 'healthy'});
 });
 
-router.get('*', (req, res) => {
+router.get('*default', (req, res) => {
   const { headers, ip, ips } = req;
   const buildID = process.env.BUILD_ID;
   const number = crypto.randomInt(10000);
