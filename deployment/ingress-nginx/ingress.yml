@@ -17,7 +17,7 @@ metadata:
       server_tokens off;
 spec:
   rules:
-    - host: $(HOST)
+    - host: node.saidsef.co.uk
       http:
         paths:
           - path: /
