@@ -20,15 +20,11 @@ updates:
     directory: "/app"
     schedule:
       interval: "weekly"
-    reviewers:
-      - "saidsef"
     pull-request-branch-name:
       separator: "-"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "weekly"
-    reviewers:
-      - "saidsef"
     pull-request-branch-name:
       separator: "-"
