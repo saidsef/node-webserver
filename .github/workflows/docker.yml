@@ -25,10 +25,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out repository code
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
     - name: Set Tag Names
       run: |
-        echo "TAG=${{ github.head_ref || github.ref_name }}" >> $GITHUB_ENV
+        SLUG=$(echo "${{ github.head_ref || github.ref_name }}" \
+          | tr '[:upper:]' '[:lower:]' \
+          | sed 's/[^a-z0-9-]/-/g' \
+          | cut -c1-50 \
+          | sed 's/-*$//')
+        echo "TAG=${SLUG}" >> $GITHUB_ENV
         echo "DATE=v$(echo `date +'%Y.%m'`)" >> $GITHUB_ENV
         echo "REPO_NAME=$(echo ${PWD##*/})" >> $GITHUB_ENV
     - name: Login to DockerHub
@@ -99,7 +104,7 @@ jobs:
       - name: Create k8s Kind Cluster
         uses: helm/kind-action@v1.14.0
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Run K8s test
         run: |
           kubectl cluster-info
