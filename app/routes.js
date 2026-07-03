@@ -1,7 +1,6 @@
-'use strict';
+import express from 'express';
+import crypto from 'node:crypto';
 
-const express = require('express');
-const crypto = require('crypto');
 const router = express.Router();
 
 router.get('/healthz', (req, res) => {
@@ -26,4 +25,4 @@ router.get('*default', (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;
