@@ -1,9 +1,7 @@
-'use strict';
-
-const express = require('express');
-const logging = require('pino-http');
-const compression = require('compression');
-const helmet = require('helmet');
+import express from 'express';
+import logging from 'pino-http';
+import compression from 'compression';
+import helmet from 'helmet';
 
 const middleware = [
   express.urlencoded({ extended: true }),
@@ -29,4 +27,4 @@ const middleware = [
   compression()
 ];
 
-module.exports = middleware;
+export default middleware;

@@ -1,8 +1,9 @@
 {
   "name": "node-webserver",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "description": "test application - web server",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Debug: no test specified\" && exit 0",
     "start": "node index.js",
@@ -39,8 +40,5 @@
   },
   "bugs": {
     "url": "https://github.com/saidsef/node-webserver/issues"
-  },
-  "devDependencies": {
-    "mocha": "^11.0.1"
   }
 }

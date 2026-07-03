@@ -1,9 +1,7 @@
-'use strict';
-
-const express = require('express');
-const http = require('http');
-const middleware = require('./middleware');
-const routes = require('./routes');
+import express from 'express';
+import http from 'node:http';
+import middleware from './middleware.js';
+import routes from './routes.js';
 
 const app = express();
 const server = http.createServer(app);
