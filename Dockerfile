@@ -20,10 +20,8 @@ COPY ./app/ /code
 RUN echo "${BUILD_ID}" > build_id.txt
 RUN apk add --update --no-cache curl && \
     rm -rfv /var/cache/apk/* && \
-    yarn install --prod && \
-    yarn check && \
-    yarn autoclean --init && \
-    yarn autoclean --force && \
+    npm install --omit=dev --no-audit --no-fund && \
+    npm cache clean --force && \
     chown -R nobody .
 
 USER nobody
